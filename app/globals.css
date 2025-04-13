@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+  --font-space-grotesk: var(--font-space-grotesk);
+  --font-poppins: var(--font-poppins);
+  --font-raleway: var(--font-raleway);
+  --font-bebas-neue: var(--font-bebas-neue);
+  --font-inter: var(--font-inter);
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+.hero-text-3d {
+  color: white;
+  position: relative;
+  overflow: hidden;
+  animation: heroGlow 3s ease-in-out infinite;
+}
+
+.hero-text-3d::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  z-index: -1;
+  background: linear-gradient(45deg, rgba(163, 255, 0, 0.2), rgba(163, 255, 0, 0.4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: blur(4px);
+}
+
+.hero-text-3d::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  color: rgba(163, 255, 0, 0.2);
+  z-index: -1;
+  filter: blur(1px);
+}
+
+@keyframes heroGlow {
+  0%,
+  100% {
+    filter: brightness(100%) drop-shadow(0 0 10px rgba(163, 255, 0, 0.7));
+  }
+  50% {
+    filter: brightness(120%) drop-shadow(0 0 20px rgba(163, 255, 0, 0.9));
+  }
+}
+
+.font-poppins {
+  font-family: var(--font-poppins);
+}
+
+.font-raleway {
+  font-family: var(--font-raleway);
+}
+
+.font-space-grotesk {
+  font-family: var(--font-space-grotesk);
+}
+
+.font-bebas-neue {
+  font-family: var(--font-bebas-neue);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+.benefit-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.benefit-icon {
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+  transform: scale(1.1);
+}
+
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .embla__slide {
+    flex: 0 0 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .embla__slide {
+    flex: 0 0 33.33%;
+  }
+}
+
+.embla__button {
+  z-index: 1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.embla__button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.embla__button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.glow {
+  transition: all 0.3s ease;
+}
+
+.glow:hover {
+  box-shadow: 0 0 20px rgba(163, 255, 0, 0.5);
+}
+
+/* Remove this animation as we're using a different approach now
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.5) rotate(360deg);
+    opacity: 0;
+  }
+}
+*/
+
