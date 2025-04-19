@@ -374,6 +374,46 @@ export default function ProductsPage() {
                     </div>
                   </div>
                 ))}
+
+              {/* Review Section */}
+              <section className="mt-16">
+                <h2 className="text-3xl font-bold text-white mb-8">Customer Reviews</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {/* Sample Reviews */}
+                  {[
+                    { name: "Sarah M.", date: "May 20, 2024", review: "Great product! Noticed a difference within a week." },
+                    { name: "John D.", date: "April 15, 2024", review: "Excellent quality and fast shipping. Highly recommend." },
+                    { name: "Emily R.", date: "March 22, 2024", review: "This supplement is fantastic! I feel so much better." },
+                  ].map((review, index) => (
+                    <div
+                      key={index}
+                      className="rounded-xl bg-gradient-to-r from-green-800 to-black p-6 shadow-lg text-white"
+                    >
+                      {/* Star Rating (Placeholder) */}
+                      <div className="text-yellow-400 mb-2">
+                        ★★★★★
+                      </div>
+                      <h3 className="font-semibold text-lg mb-2">{review.name}</h3>
+                      <p className="text-sm text-gray-300 mb-4">{review.date}</p>
+                      <p>{review.review}</p>
+                    </div>
+                  ))}
+                </div>
+                {/* Example with no gradient - adjust as desired */}
+                {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {[
+                    { name: "Sarah M.", date: "May 20, 2024", review: "Great product! Noticed a difference within a week." },
+                    { name: "John D.", date: "April 15, 2024", review: "Excellent quality and fast shipping. Highly recommend." },
+                    { name: "Emily R.", date: "March 22, 2024", review: "This supplement is fantastic! I feel so much better." },
+                  ].map((review, index) => (
+                    <div key={index} className="rounded-xl bg-zinc-900 p-6 shadow-lg text-white">
+                      <h3 className="font-semibold text-lg mb-2">{review.name}</h3>
+                      <p className="text-sm text-gray-300 mb-4">{review.date}</p>
+                      <p>{review.review}</p>
+                    </div>
+                  ))}
+                </div> */}
+              </section>
             </div>
           ) : quizStarted ? (
             // Quiz View
@@ -425,8 +465,8 @@ export default function ProductsPage() {
                       <div
                         className={`absolute inset-0 top-[110px] left-0 right-0 flex items-center justify-center ${index === 0 ? "pb-0" : "pb-8"} ${index === 0 ? "left-image-container" : ""}`}
                       >
-                        <div className="w-full h-full mx-auto overflow-hidden flex justify-start items-center group">
-                          <Image
+                        <div className="w-full h-full mx-auto overflow-hidden flex justify-start items-center group">  
+                          {index !== 3 && <Image
                             src={
                               index === 0
                                 ? "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-UJ5gBvThmZclDrcjVm210vI3FSIhKu.png"
@@ -442,20 +482,14 @@ export default function ProductsPage() {
                                   : "Herbal Aura supplement bottles - Mullein Leaf, Ashwagandha, and Sea Moss capsules"
                             }
                             fill={false}
-                            width={index === 0 ? 800 : index === 2 ? 600 : 350}
+                            width={index === 0 ? 800 : index === 1 ? 350 : 600}
                             height={500}
-                            className={
-                              index === 0
-                                ? "w-auto h-auto max-h-[480px] max-w-[600px] object-contain ml-16 transform scale-100 object-position-top mt-4 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
-                                : index === 1
-                                  ? "w-auto h-auto max-h-[360px] object-contain transform scale-80 mt-8 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
-                                  : "w-auto h-auto max-h-[360px] object-contain ml-4 transform scale-95 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
-                            }
+                            className={index === 0 ? "w-[90%] h-[90%] max-h-[480px] object-contain ml-16 object-position-top mt-4 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in" : index === 1 ? "w-auto h-auto max-h-[360px] object-cover mt-8 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in" : "w-[90%] h-[90%] object-contain ml-4 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"}
                           />
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
+                        }</div>  
+                      </div>  
+                    </motion.div> 
+                    ))}
                 </div>
                 {/* Remove this right image frame since we've repositioned it */}
                 {/* <motion.div
@@ -605,7 +639,7 @@ export default function ProductsPage() {
                 </div>
               </div>
             </>
-          )}
+          )}  
         </div>
       </main>
       {/* Why Choose Us Section */}
@@ -613,10 +647,10 @@ export default function ProductsPage() {
 
       {/* Enhanced Footer */}
       <EnhancedFooter />
-
+  
       {/* Add the style tag here */}
       <style jsx>{`
-      .left-image-container img {
+        .left-image-container img {
         transform: scale(1.2); /* Adjust zoom level */
         object-fit: contain;  /* Ensures the image is fully visible */
         max-width: 100%; /* Prevents overflow */
@@ -626,7 +660,7 @@ export default function ProductsPage() {
         object-position: center top;
         margin-bottom: -40px; /* Increased from -15px to -40px for a more significant crop */
       }
-    `}</style>
+        `}</style>  
     </div>
   )
 }

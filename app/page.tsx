@@ -53,7 +53,7 @@ export default function Home() {
       <NavbarSpacer />
 
       {/* Hero Section */}
-      <main className="relative container mx-auto px-6 pt-24 pb-32 flex-grow">
+      <main className="relative container mx-auto px-6 pt-24 pb-32 flex-grow mt-32">
         {" "}
         {/* Updated padding */}
         <div className="text-center max-w-4xl mx-auto">
