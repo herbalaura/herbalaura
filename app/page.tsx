@@ -71,7 +71,7 @@ export default function Home() {
               alt="Herbal Aura Logo"
               width={800}
               height={200}
-              className="mx-auto h-auto w-full max-w-[500px] md:max-w-[600px] lg:max-w-[800px] transform -rotate-90 mb-2 -mt-[40rem]"
+              className="mx-auto h-auto w-full max-w-[500px] md:max-w-[600px] lg:max-w-[800px] transform -rotate-90 mb-2 -mt-[35rem]"
               priority
             />
           </motion.div>
@@ -161,7 +161,7 @@ export default function Home() {
                 alt="Mullein Leaf Capsules"
                 width={300}
                 height={600}
-                className="transform -rotate-12 object-contain relative z-10 mt-52 -ml-16 mr-16"
+                className="transform -rotate-12 object-contain relative z-10 mt-52 -ml-16 mr-16 scale-75"
                 priority
               />
             </div>
@@ -575,7 +575,7 @@ export default function Home() {
                 alt="Featured Products Tag"
                 width={600}
                 height={200}
-                className="w-full h-auto object-contain mt-16"
+                className="w-full h-auto object-contain py-4 px-2"
                 priority
               />
             </motion.div>

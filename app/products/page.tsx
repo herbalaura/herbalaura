@@ -416,16 +416,16 @@ export default function ProductsPage() {
                   {[1, 2, 3].map((_, index) => (
                     <motion.div
                       key={index}
-                      className={`relative ${index === 2 ? "w-[380px]" : "w-[280px]"} h-[450px] rounded-lg overflow-hidden backdrop-blur-sm`}
+                      className={`relative ${index === 2 ? "w-[380px]" : "w-[280px]"} h-[500px] rounded-lg overflow-hidden backdrop-blur-sm`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.1 * index }}
                     >
                       <div className="absolute inset-0"></div>
                       <div
-                        className={`absolute inset-0 top-[110px] left-0 right-0 flex items-center justify-center ${index === 0 ? "pb-0" : "pb-8"} ${index === 0 ? "left-image-container" : ""}`}
+                        className={`absolute inset-0 top-[130px] left-0 right-0 flex items-center justify-center ${index === 0 ? "pb-0 overflow-hidden" : index === 2 ? "pb-0 overflow-hidden" : "pb-8"} ${index === 0 ? "left-image-container" : index === 2 ? "right-image-container" : ""}`}
                       >
-                        <div className="w-full h-full mx-auto overflow-hidden flex justify-start items-center group">
+                        <div className={`${index === 0 ? "w-[400px] max-w-full overflow-hidden flex justify-center items-center h-[400px]" : index === 2 ? "w-full max-w-full overflow-hidden flex justify-center items-center h-[400px]" : "w-full h-full mx-auto overflow-hidden flex justify-start items-center"} group`}>
                           <Image
                             src={
                               index === 0
@@ -446,10 +446,10 @@ export default function ProductsPage() {
                             height={500}
                             className={
                               index === 0
-                                ? "w-auto h-auto max-h-[480px] max-w-[600px] object-contain ml-16 transform scale-100 object-position-top mt-4 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
+                                ? "max-w-full h-auto object-contain translate-y-[30px] transition-transform duration-300 ease-in-out group-hover:scale-110 cursor-zoom-in"
                                 : index === 1
                                   ? "w-auto h-auto max-h-[360px] object-contain transform scale-80 mt-8 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
-                                  : "w-auto h-auto max-h-[360px] object-contain ml-4 transform scale-95 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
+                                  : "max-w-full h-auto object-contain transition-transform duration-300 ease-in-out group-hover:scale-110 cursor-zoom-in"
                             }
                           />
                         </div>
@@ -616,15 +616,45 @@ export default function ProductsPage() {
 
       {/* Add the style tag here */}
       <style jsx>{`
-      .left-image-container img {
-        transform: scale(1.2); /* Adjust zoom level */
-        object-fit: contain;  /* Ensures the image is fully visible */
-        max-width: 100%; /* Prevents overflow */
-        max-height: 100%; /* Keeps proportions */
+      .left-image-container img, .right-image-container img {
+        transform-origin: center; /* Center the transform origin for proper scaling */
+        transition: transform 0.3s ease;
       }
-      .object-position-top {
-        object-position: center top;
-        margin-bottom: -40px; /* Increased from -15px to -40px for a more significant crop */
+      /* Container styling for the images */
+      .left-image-container > div, .right-image-container > div {
+        height: 100%;
+      }
+      /* Add custom translate class in case Tailwind doesn't have this specific value */
+      .translate-y-\\[30px\\] {
+        transform: translateY(30px);
+      }
+      /* Add custom scale classes since Tailwind doesn't have these specific scales */
+      .scale-50 {
+        transform: scale(0.5);
+      }
+      .scale-60 {
+        transform: scale(0.6);
+      }
+      .scale-65 {
+        transform: scale(0.65);
+      }
+      .scale-70 {
+        transform: scale(0.7);
+      }
+      .scale-75 {
+        transform: scale(0.75);
+      }
+      .scale-90 {
+        transform: scale(0.9);
+      }
+      .scale-105 {
+        transform: scale(1.05);
+      }
+      .scale-110 {
+        transform: scale(1.1);
+      }
+      .scale-115 {
+        transform: scale(1.15);
       }
     `}</style>
     </div>
