@@ -456,37 +456,51 @@ export default function ProductsPage() {
                   {[1, 2, 3].map((_, index) => (
                     <motion.div
                       key={index}
-                      className={`relative ${index === 2 ? "w-[380px]" : "w-[280px]"} h-[450px] rounded-lg overflow-hidden backdrop-blur-sm`}
+                      className={`relative ${index === 2 ? "w-[380px] mt-6" : "w-[280px]"} h-[450px] rounded-lg overflow-hidden backdrop-blur-sm`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.1 * index }}
                     >
                       <div className="absolute inset-0"></div>
                       <div
-                        className={`absolute inset-0 top-[110px] left-0 right-0 flex items-center justify-center ${index === 0 ? "pb-0" : "pb-8"} ${index === 0 ? "left-image-container" : ""}`}
+                        className={`absolute inset-0 top-[110px] left-0 right-0 flex items-center justify-center ${index === 0 ? "pb-0" : "pb-8"} ${index === 0 ? "left-image-container" : ""} ${index === 2 ? "right-image-wrapper" : ""}`}
                       >
                         <div className="w-full h-full mx-auto overflow-hidden flex justify-start items-center group">  
-                          {index !== 3 && <Image
-                            src={
-                              index === 0
-                                ? "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-UJ5gBvThmZclDrcjVm210vI3FSIhKu.png"
-                                : index === 1
-                                  ? "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-MtRBtQDYa3JF6EUw5PFAMaGq21SjfQ.png"
-                                  : "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-h8Hzus1h5Q1TQ8ye8xibBkzp5E0Wif.png"
-                            }
-                            alt={
-                              index === 0
-                                ? "Herbal Aura supplements stack with Sea Moss, Mullein Leaf, and Ashwagandha Capsules"
-                                : index === 1
-                                  ? "Our Premium Organic Supplements logo"
-                                  : "Herbal Aura supplement bottles - Mullein Leaf, Ashwagandha, and Sea Moss capsules"
-                            }
-                            fill={false}
-                            width={index === 0 ? 800 : index === 1 ? 350 : 600}
-                            height={500}
-                            className={index === 0 ? "w-[90%] h-[90%] max-h-[480px] object-contain ml-16 object-position-top mt-4 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in" : index === 1 ? "w-auto h-auto max-h-[360px] object-cover mt-8 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in" : "w-[90%] h-[90%] object-contain ml-4 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"}
-                          />
-                        }</div>  
+                          {index !== 3 && (
+                            index === 2 ? (
+                              <div className="group transition-transform duration-300 ease-in-out hover:scale-105 scale-95">
+                                <Image
+                                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-h8Hzus1h5Q1TQ8ye8xibBkzp5E0Wif.png"
+                                  alt="Herbal Aura supplement bottles - Mullein Leaf, Ashwagandha, and Sea Moss capsules"
+                                  fill={false}
+                                  width={600}
+                                  height={500}
+                                  className="w-[90%] h-[90%] object-contain ml-4 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
+                                />
+                              </div>
+                            ) : index === 0 ? (
+                              <div className="scale-[1.25] origin-center relative -translate-x-4 transition-transform duration-300">
+                                <Image
+                                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-UJ5gBvThmZclDrcjVm210vI3FSIhKu.png"
+                                  alt="Herbal Aura supplements stack with Sea Moss, Mullein Leaf, and Ashwagandha Capsules"
+                                  fill={false}
+                                  width={800}
+                                  height={500}
+                                  className="w-[90%] h-[90%] max-h-[480px] object-contain ml-16 object-position-top mt-4 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
+                                />
+                              </div>
+                            ) : (
+                              <Image
+                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-MtRBtQDYa3JF6EUw5PFAMaGq21SjfQ.png"
+                                alt="Our Premium Organic Supplements logo"
+                                fill={false}
+                                width={350}
+                                height={500}
+                                className="w-auto h-auto max-h-[360px] object-cover mt-8 transition-transform duration-500 group-hover:scale-125 cursor-zoom-in"
+                              />
+                            )
+                          )}
+                        </div>  
                       </div>  
                     </motion.div> 
                     ))}
@@ -651,16 +665,15 @@ export default function ProductsPage() {
       {/* Add the style tag here */}
       <style jsx>{`
         .left-image-container img {
-        transform: scale(1.2); /* Adjust zoom level */
-        object-fit: contain;  /* Ensures the image is fully visible */
-        max-width: 100%; /* Prevents overflow */
-        max-height: 100%; /* Keeps proportions */
-      }
-      .object-position-top {
-        object-position: center top;
-        margin-bottom: -40px; /* Increased from -15px to -40px for a more significant crop */
-      }
-        `}</style>  
+          object-fit: contain;  /* Ensures the image is fully visible */
+          max-width: 100%; /* Prevents overflow */
+          max-height: 100%; /* Keeps proportions */
+        }
+        .object-position-top {
+          object-position: center top;
+          margin-bottom: -40px; /* Increased from -15px to -40px for a more significant crop */
+        }
+      `}</style>  
     </div>
   )
 }
