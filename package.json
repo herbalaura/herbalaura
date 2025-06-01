@@ -1,0 +1,12 @@
+{
+  "name": "herbal-aura-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Herbal Aura e-commerce frontend (wrapper for herbalaura subfolder)",
+  "scripts": {
+    "dev": "cd herbalaura && npm run dev",
+    "build": "cd herbalaura && npm run build",
+    "start": "cd herbalaura && npm run start",
+    "lint": "cd herbalaura && npm run lint"
+  }
+} 
