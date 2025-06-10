@@ -249,13 +249,12 @@ export default function SeaMossProductPage() {
                               <Star key={i} className="w-4 h-4 text-[#a3ff00] fill-[#a3ff00]" />
                             ))}
                           </div>
-                          <span className="ml-2 font-semibold">Amazing product!</span>
+                          <span className="ml-2 font-semibold">Digestive and Energy Boost</span>
                         </div>
                         <p className="text-sm">
-                          I've been taking these Sea Moss capsules for a month now and I can really feel the difference
-                          in my energy levels. Highly recommend!
+                          I've been taking Sea Moss every morning and it's done wonders for my digestion and energy levels. I feel less bloated and way more alert during the day. It's now part of my daily routine and I swear by it.
                         </p>
-                        <p className="text-xs text-white/50 mt-1">Sarah K. - Verified Purchase</p>
+                        <p className="text-xs text-white/50 mt-1">Alicia P. - October 18, 2024</p>
                       </div>
 
                       <div className="mb-6">
@@ -265,13 +264,27 @@ export default function SeaMossProductPage() {
                               <Star key={i} className="w-4 h-4 text-[#a3ff00] fill-[#a3ff00]" />
                             ))}
                           </div>
-                          <span className="ml-2 font-semibold">Great quality</span>
+                          <span className="ml-2 font-semibold">Immune System Boost</span>
                         </div>
                         <p className="text-sm">
-                          These capsules are easy to take and I love that they're 100% organic. My digestion has
-                          improved significantly since I started taking them.
+                          Sea Moss gave my immune system a real boost this winter. I usually get sick around February, but I haven't even caught a cold this year. My skin also feels clearer and healthier since I started taking it.
                         </p>
-                        <p className="text-xs text-white/50 mt-1">Michael T. - Verified Purchase</p>
+                        <p className="text-xs text-white/50 mt-1">Marcus L. - February 3, 2025</p>
+                      </div>
+                      
+                      <div className="mb-6">
+                        <div className="flex items-center mb-2">
+                          <div className="flex">
+                            {[...Array(5)].map((_, i) => (
+                              <Star key={i} className="w-4 h-4 text-[#a3ff00] fill-[#a3ff00]" />
+                            ))}
+                          </div>
+                          <span className="ml-2 font-semibold">Thyroid Support & Better Focus</span>
+                        </div>
+                        <p className="text-sm">
+                          I started using Sea Moss for thyroid support and noticed better focus and less fatigue within two weeks. It's one of the few supplements I've tried that actually made a difference. I'm really happy with the results so far.
+                        </p>
+                        <p className="text-xs text-white/50 mt-1">Danielle R. - May 27, 2025</p>
                       </div>
 
                       <Link href="#" className="text-[#a3ff00] hover:underline text-sm flex items-center">
