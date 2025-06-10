@@ -124,11 +124,11 @@ export default function AboutPage() {
                 <div className="relative border-2 border-[#a3ff00]/30 rounded-lg p-2 bg-black/30 backdrop-blur-sm transform rotate-3">
                   <div className="border-2 border-white/10 rounded-lg overflow-hidden transform -rotate-6">
                     <Image
-                      src="https://images.unsplash.com/photo-1471193945509-9ad0617afabf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                      alt="Organic herbs and plants"
+                      src="/images/about-collage.png"
+                      alt="Herbal Aura Ingredients"
                       width={600}
                       height={400}
-                      className="rounded-lg w-full h-auto object-cover"
+                      className="rounded-lg shadow-md"
                     />
                   </div>
                 </div>
