@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ShoppingCart, ArrowRight, Heart, Share2, Star } from "lucide-react"
 import Link from "next/link"
@@ -8,6 +8,7 @@ import EnhancedNavbar from "@/components/EnhancedNavbar"
 import NavbarSpacer from "@/components/NavbarSpacer"
 import EnhancedFooter from "@/components/EnhancedFooter"
 import AshwagandhaProductGallery from "@/components/AshwagandhaProductGallery"
+import ProductTestimonials from "@/components/ProductTestimonials"
 
 export default function AshwagandhaProductPage() {
   const [quantity, setQuantity] = useState(1)
@@ -16,6 +17,41 @@ export default function AshwagandhaProductPage() {
 
   const incrementQuantity = () => setQuantity((prev) => prev + 1)
   const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+
+  // Define Ashwagandha-specific testimonials
+  const ashwagandhaReviews = [
+    {
+      name: "Jason R.",
+      date: "May 28, 2024",
+      text: "I started taking Ashwagandha to improve my energy levels, and it's been a total game-changer. I feel more focused during work hours, and that mid-afternoon crash is gone. I actually look forward to getting things done now.",
+      rating: 5
+    },
+    {
+      name: "Danielle K.",
+      date: "May 16, 2024",
+      text: "I was constantly stressed and overwhelmed, especially at night. Ashwagandha has helped me wind down naturally. I'm sleeping better, and I feel way more emotionally balanced throughout the day.",
+      rating: 5
+    },
+    {
+      name: "Leo S.",
+      date: "April 30, 2024",
+      text: "I've been taking Ashwagandha consistently for a few months, and I noticed I haven't caught a cold or felt run-down like before. It's become part of my daily routine to help strengthen my immune system, especially during travel season.",
+      rating: 5
+    }
+  ]
+
+  // Temporary test to confirm this file is being rendered
+  console.log("Ashwagandha page is rendering");
+  
+  // Add effect for debugging
+  useEffect(() => {
+    console.log("Ashwagandha page mounted");
+    
+    // Return any errors to the console
+    return () => {
+      console.log("Ashwagandha page unmounted");
+    };
+  }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black flex flex-col">
@@ -71,7 +107,7 @@ export default function AshwagandhaProductPage() {
               </div>
 
               {/* Product Title */}
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Ashwagandha Capsules</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Ashwagandha Capsules ASHWAGANDHA TEST MODE</h1>
 
               {/* Rating */}
               <div className="flex items-center mb-4">
@@ -242,55 +278,17 @@ export default function AshwagandhaProductPage() {
 
                   {activeTab === "reviews" && (
                     <div className="text-white/80">
-                      <div className="mb-6">
-                        <div className="flex items-center mb-2">
-                          <div className="flex">
-                            {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-4 h-4 text-[#a3ff00] fill-[#a3ff00]" />
-                            ))}
-                          </div>
-                          <span className="ml-2 font-semibold">Stress Relief & Better Sleep</span>
+                      <div className="space-y-12">
+                        <div className="flex justify-between items-center mb-8">
+                          <h2 className="text-3xl font-bold text-white">Customer Reviews</h2>
+                          <Link href="/products/ashwagandha/testimonials" className="text-[#a3ff00] hover:underline flex items-center">
+                            View All <ArrowRight className="ml-1 h-4 w-4" />
+                          </Link>
                         </div>
-                        <p className="text-sm">
-                          I started taking Ashwagandha to help with daily stress and sleep issues. Within a week, I noticed I was falling asleep faster and waking up less groggy. It's helped me feel more balanced and less anxious throughout the day.
-                        </p>
-                        <p className="text-xs text-white/50 mt-1">Jason K. - November 7, 2024</p>
+                        
+                        {/* Use the product-specific reviews */}
+                        <ProductTestimonials testimonials={ashwagandhaReviews} />
                       </div>
-
-                      <div className="mb-6">
-                        <div className="flex items-center mb-2">
-                          <div className="flex">
-                            {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-4 h-4 text-[#a3ff00] fill-[#a3ff00]" />
-                            ))}
-                          </div>
-                          <span className="ml-2 font-semibold">Better Focus & Mental Clarity</span>
-                        </div>
-                        <p className="text-sm">
-                          Ashwagandha has completely changed how I handle busy work weeks. I no longer feel overwhelmed or mentally foggy in the afternoons. My focus and mood have both improved since starting this supplement.
-                        </p>
-                        <p className="text-xs text-white/50 mt-1">Melissa T. - January 22, 2025</p>
-                      </div>
-                      
-                      <div className="mb-6">
-                        <div className="flex items-center mb-2">
-                          <div className="flex">
-                            {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-4 h-4 text-[#a3ff00] fill-[#a3ff00]" />
-                            ))}
-                          </div>
-                          <span className="ml-2 font-semibold">Improved Energy & Stress Response</span>
-                        </div>
-                        <p className="text-sm">
-                          After hearing about Ashwagandha from a friend, I decided to try it for my energy and overall wellness. I feel more grounded and less reactive, especially in stressful situations. It's become a staple in my daily supplement stack.
-                        </p>
-                        <p className="text-xs text-white/50 mt-1">David R. - May 3, 2025</p>
-                      </div>
-
-                      <Link href="#" className="text-[#a3ff00] hover:underline text-sm flex items-center">
-                        View all 19 reviews
-                        <ArrowRight className="w-4 h-4 ml-1" />
-                      </Link>
                     </div>
                   )}
                 </div>

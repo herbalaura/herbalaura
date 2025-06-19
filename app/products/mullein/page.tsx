@@ -7,35 +7,35 @@ import Link from "next/link"
 import EnhancedNavbar from "@/components/EnhancedNavbar"
 import NavbarSpacer from "@/components/NavbarSpacer"
 import EnhancedFooter from "@/components/EnhancedFooter"
-import SeaMossProductGallery from "@/components/SeaMossProductGallery"
+import MulleinLeafProductGallery from "@/components/MulleinLeafProductGallery"
 import ProductTestimonials from "@/components/ProductTestimonials"
 
-export default function SeaMossProductPage() {
+export default function MulleinLeafProductPage() {
   const [quantity, setQuantity] = useState(1)
   const [purchaseType, setPurchaseType] = useState("one-time")
   const [activeTab, setActiveTab] = useState("description")
 
   const incrementQuantity = () => setQuantity((prev) => prev + 1)
   const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
-
-  // Define Sea Moss-specific testimonials
-  const seaMossReviews = [
+  
+  // Define Mullein-specific testimonials
+  const mulleinReviews = [
     {
-      name: "Alicia P.",
-      date: "October 18, 2024",
-      text: "I've been taking Sea Moss every morning and it's done wonders for my digestion and energy levels. I feel less bloated and way more alert during the day. It's now part of my daily routine and I swear by it.",
+      name: "Sarah M.",
+      date: "May 20, 2024",
+      text: "I've been a smoker for over 15 years, and my lungs always felt heavy and tight. After just a couple of weeks on Mullein Leaf, I started breathing easier and coughing less. It truly feels like my lungs have been deeply detoxed.",
       rating: 5
     },
     {
-      name: "Marcus L.",
-      date: "February 3, 2025",
-      text: "Sea Moss gave my immune system a real boost this winter. I usually get sick around February, but I haven't even caught a cold this year. My skin also feels clearer and healthier since I started taking it.",
+      name: "John D.",
+      date: "April 15, 2024",
+      text: "I suffer from mild asthma and often get short of breath, especially during allergy season. Since starting Mullein Leaf, my breathing has felt much more open and manageable. It's the only herbal supplement that's actually made a difference.",
       rating: 5
     },
     {
-      name: "Danielle R.",
-      date: "May 27, 2025",
-      text: "I started using Sea Moss for thyroid support and noticed better focus and less fatigue within two weeks. It's one of the few supplements I've tried that actually made a difference. I'm really happy with the results so far.",
+      name: "Emily R.",
+      date: "March 22, 2024",
+      text: "I had constant mucus buildup in my chest and always felt congested in the mornings. Mullein Leaf helped break that up and clear it out naturally. I feel lighter, clearer, and way more comfortable throughout the day.",
       rating: 5
     }
   ]
@@ -68,7 +68,7 @@ export default function SeaMossProductPage() {
                 Products
               </Link>
               <span className="mx-2 text-gray-400">/</span>
-              <span className="text-white">Sea Moss Capsules</span>
+              <span className="text-white">Mullein Leaf Capsules</span>
             </nav>
           </div>
 
@@ -76,7 +76,7 @@ export default function SeaMossProductPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Product Gallery */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <SeaMossProductGallery />
+              <MulleinLeafProductGallery />
             </motion.div>
 
             {/* Product Info */}
@@ -89,12 +89,12 @@ export default function SeaMossProductPage() {
               {/* Product Badge */}
               <div className="mb-2">
                 <span className="inline-block bg-[#a3ff00] text-black text-xs font-bold px-3 py-1 rounded-full">
-                  New
+                  Bestseller
                 </span>
               </div>
 
               {/* Product Title */}
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Sea Moss Capsules</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Mullein Leaf Capsules TEST MODE</h1>
 
               {/* Rating */}
               <div className="flex items-center mb-4">
@@ -103,7 +103,7 @@ export default function SeaMossProductPage() {
                     <Star key={i} className="w-5 h-5 text-[#a3ff00] fill-[#a3ff00]" />
                   ))}
                 </div>
-                <span className="ml-2 text-white/70">24 reviews</span>
+                <span className="ml-2 text-white/70">21 reviews</span>
               </div>
 
               {/* Price */}
@@ -114,8 +114,8 @@ export default function SeaMossProductPage() {
 
               {/* Description */}
               <p className="text-white/80 mb-6">
-                Fuel your body with over 90 essential minerals found in sea moss, supporting immunity, digestion, and
-                thyroid health. This nutrient-rich superfood promotes energy, gut balance, and overall vitality.
+                Support respiratory health with our organic Mullein Leaf supplement. Traditionally used for asthma, 
+                smoking-related concerns, and seasonal allergies.
               </p>
 
               {/* Purchase Options */}
@@ -225,21 +225,20 @@ export default function SeaMossProductPage() {
                   {activeTab === "description" && (
                     <div className="text-white/80">
                       <p className="mb-4">
-                        Our premium Sea Moss capsules are packed with over 90 essential minerals that your body needs
-                        for optimal health. Sea Moss (Irish Moss) has been used for centuries as a natural remedy for
-                        various health concerns.
+                        Our premium Mullein Leaf capsules harness the power of this traditional herb to support respiratory health. 
+                        Mullein has been used for centuries to soothe the lungs and promote clearer breathing.
                       </p>
                       <p className="mb-4">Benefits include:</p>
                       <ul className="list-disc pl-5 space-y-2">
-                        <li>Supports immune system function</li>
-                        <li>Promotes digestive health</li>
-                        <li>Supports thyroid function</li>
-                        <li>Helps maintain healthy skin</li>
-                        <li>Provides natural energy boost</li>
+                        <li>Supports respiratory health</li>
+                        <li>Soothes irritated lungs and airways</li>
+                        <li>Helps with asthma and breathing issues</li>
+                        <li>Supports recovery after smoking</li>
+                        <li>Helps clear mucus and congestion</li>
                       </ul>
                       <p className="mt-4">
-                        Each bottle contains 60 capsules (1500mg) of pure, organic Irish Sea Moss, carefully harvested
-                        and processed to preserve its nutritional integrity.
+                        Each bottle contains 60 capsules (1200mg) of pure, organic Mullein Leaf, carefully processed 
+                        to preserve its bioactive compounds and therapeutic properties.
                       </p>
                     </div>
                   )}
@@ -247,11 +246,11 @@ export default function SeaMossProductPage() {
                   {activeTab === "ingredients" && (
                     <div className="text-white/80">
                       <p className="mb-4">
-                        <span className="font-semibold">Ingredients:</span> 100% Organic Irish Sea Moss (Chondrus
-                        crispus), Vegetable Cellulose Capsule
+                        <span className="font-semibold">Ingredients:</span> 100% Organic Mullein Leaf (Verbascum thapsus), 
+                        Vegetable Cellulose Capsule
                       </p>
                       <p className="mb-4">
-                        <span className="font-semibold">Suggested Use:</span> Take 2 capsules daily with water,
+                        <span className="font-semibold">Suggested Use:</span> Take 2 capsules daily with water, 
                         preferably with food.
                       </p>
                       <div className="bg-black/20 p-4 rounded-lg mt-4">
@@ -268,13 +267,13 @@ export default function SeaMossProductPage() {
                       <div className="space-y-12">
                         <div className="flex justify-between items-center mb-8">
                           <h2 className="text-3xl font-bold text-white">Customer Reviews</h2>
-                          <Link href="/products/sea-moss/testimonials" className="text-[#a3ff00] hover:underline flex items-center">
+                          <Link href="/products/mullein/testimonials" className="text-[#a3ff00] hover:underline flex items-center">
                             View All <ArrowRight className="ml-1 h-4 w-4" />
                           </Link>
                         </div>
                         
                         {/* Use the product-specific reviews */}
-                        <ProductTestimonials testimonials={seaMossReviews} />
+                        <ProductTestimonials testimonials={mulleinReviews} />
                       </div>
                     </div>
                   )}
@@ -289,5 +288,4 @@ export default function SeaMossProductPage() {
       <EnhancedFooter />
     </div>
   )
-}
-
+} 
