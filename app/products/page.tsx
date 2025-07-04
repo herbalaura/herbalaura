@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
-import { ShoppingCart, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import EnhancedNavbar from "@/components/EnhancedNavbar"
@@ -11,15 +10,14 @@ import NavbarSpacer from "@/components/NavbarSpacer"
 import EnhancedFooter from "@/components/EnhancedFooter"
 
 export default function ProductsPage() {
-  const [selectedProduct, setSelectedProduct] = useState<string | null>(null)
   const [quizStarted, setQuizStarted] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [answers, setAnswers] = useState<Record<string, string>>({})
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [answers, setAnswers] = useState<Record<string, string>>({});
 
   const products = [
     {
       id: "mullein",
+      slug: "mullein",
       name: "Mullein Leaf Capsules",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-HL2V44kMF7Z8FnaXgJ1J9PmhWAmoB5.png",
       images: [
@@ -37,6 +35,7 @@ export default function ProductsPage() {
     },
     {
       id: "ashwagandha",
+      slug: "ashwagandha",
       name: "Ashwagandha Capsules",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/asw-NRxGWWsSIhTrhtW8claBkH9HO7jX9c.png",
       images: [
@@ -54,6 +53,7 @@ export default function ProductsPage() {
     },
     {
       id: "seamoss",
+      slug: "sea-moss",
       name: "Sea Moss Capsules",
       image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-0pkyCp9mQqajZ1IyjHKekMMoMNozvL.png",
       images: [
@@ -103,15 +103,9 @@ export default function ProductsPage() {
 
   const router = useRouter()
 
-  const handleProductClick = (productId: string) => {
-    setSelectedProduct(productId)
-    setSelectedImageIndex(0) // Reset to first image when changing products
-
-    // Update the URL without full page reload
-    router.push(`/products?id=${productId}`, { scroll: false })
-
-    // Scroll to top for better UX
-    window.scrollTo({ top: 0, behavior: "smooth" })
+  const handleProductClick = (productSlug: string) => {
+    // Navigate to the dynamic product page
+    router.push(`/products/${productSlug}`)
   }
 
   const handleAnswerSelect = (answer: string) => {
@@ -122,9 +116,10 @@ export default function ProductsPage() {
     } else {
       // Quiz completed, determine recommendation
       const recommendation = getRecommendation(answers)
-      setSelectedProduct(recommendation)
       setQuizStarted(false)
-      window.scrollTo({ top: 0, behavior: "smooth" })
+      
+      // Navigate to the recommended product page
+      router.push(`/products/${recommendation}`)
     }
   }
 
@@ -135,22 +130,11 @@ export default function ProductsPage() {
     } else if (answers[0] === "stress" || answers[1] === "stress-issues" || answers[2] === "high-stress") {
       return "ashwagandha"
     } else {
-      return "seamoss" // Default to sea moss for immunity and general wellness
+      return "sea-moss" // Default to sea moss for immunity and general wellness
     }
   }
 
-  useEffect(() => {
-    // Check URL for product ID
-    const params = new URLSearchParams(window.location.search)
-    const productId = params.get("id")
 
-    if (productId) {
-      const validProduct = products.find((p) => p.id === productId)
-      if (validProduct) {
-        setSelectedProduct(productId)
-      }
-    }
-  }, [])
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black flex flex-col">
@@ -186,236 +170,7 @@ export default function ProductsPage() {
 
         {/* Content container with proper z-index */}
         <div className="relative z-10">
-          {selectedProduct ? (
-            // Product Detail View
-            <div className="max-w-6xl mx-auto">
-              <button
-                onClick={() => {
-                  setSelectedProduct(null)
-                  router.push("/products", { scroll: false })
-                }}
-                className="text-[#a3ff00] mb-8 flex items-center hover:underline"
-              >
-                <ArrowRight className="w-4 h-4 mr-2 rotate-180" />
-                Back to all products
-              </button>
-
-              {products
-                .filter((p) => p.id === selectedProduct)
-                .map((product) => (
-                  <div key={product.id} className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="relative">
-                      <div className="flex">
-                        {/* Vertical thumbnails */}
-                        <div className="hidden md:flex flex-col gap-4 mr-6">
-                          {product.images.map((img, idx) => (
-                            <button
-                              key={idx}
-                              className={`w-16 h-16 rounded overflow-hidden cursor-pointer transition-all duration-300 ${
-                                idx === selectedImageIndex
-                                  ? "border-2 border-lime-500 shadow-[0_0_10px_rgba(163,255,0,0.5)]"
-                                  : "border border-white/20 hover:border-white/50"
-                              }`}
-                              onClick={() => setSelectedImageIndex(idx)}
-                            >
-                              <img
-                                src={img || "/placeholder.svg"}
-                                alt={`${product.name} - view ${idx + 1}`}
-                                className="w-full h-full object-cover"
-                              />
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Main product image */}
-                        <motion.div
-                          className="relative group flex-1"
-                          whileHover={{ scale: 1.15 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        >
-                          <div className="absolute inset-0 bg-white rounded-full filter blur-3xl opacity-5 group-hover:opacity-60 transition-opacity duration-300 w-3/4 h-3/4 m-auto"></div>
-                          <Image
-                            src={product.images[selectedImageIndex] || "/placeholder.svg"}
-                            alt={product.name}
-                            width={
-                              selectedImageIndex === 1 && (product.id === "ashwagandha" || product.id === "seamoss")
-                                ? 600
-                                : selectedImageIndex === 3 && product.id === "ashwagandha"
-                                  ? 500
-                                  : 800
-                            }
-                            height={
-                              selectedImageIndex === 1 && (product.id === "ashwagandha" || product.id === "seamoss")
-                                ? 600
-                                : selectedImageIndex === 3 && product.id === "ashwagandha"
-                                  ? 500
-                                  : 800
-                            }
-                            className={`object-contain relative z-10 mx-auto ${
-                              selectedImageIndex === 1 && (product.id === "ashwagandha" || product.id === "seamoss")
-                                ? "rounded-lg shadow-lg"
-                                : ""
-                            } transition-transform duration-300`}
-                            priority
-                          />
-                          {selectedImageIndex === 1 && (product.id === "ashwagandha" || product.id === "seamoss") && (
-                            <div className="absolute bottom-4 left-0 right-0 text-center text-sm text-white/80">
-                              <p>Tap image to view full benefits</p>
-                            </div>
-                          )}
-                          {selectedImageIndex === 3 && product.id === "ashwagandha" && (
-                            <div className="absolute bottom-4 left-0 right-0 text-center text-sm text-white/80">
-                              <p>Stacked bottles showing product collection</p>
-                            </div>
-                          )}
-                        </motion.div>
-                      </div>
-
-                      {/* Mobile thumbnails (horizontal) */}
-                      <div className="flex md:hidden justify-center gap-2 mt-4">
-                        {product.images.map((_, idx) => (
-                          <div
-                            key={idx}
-                            className={`w-2 h-2 rounded-full cursor-pointer ${
-                              idx === selectedImageIndex ? "bg-[#a3ff00]" : "bg-white/30"
-                            }`}
-                            onClick={() => setSelectedImageIndex(idx)}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex flex-col justify-center">
-                      <div className="mb-6">
-                        {product.tag && (
-                          <span className="inline-block bg-[#a3ff00] text-black text-xs font-bold px-3 py-1 rounded-full mb-2">
-                            {product.tag}
-                          </span>
-                        )}
-                        <h1 className="text-4xl font-bold text-white mb-2">{product.name}</h1>
-                        <p className="text-green-100 text-lg mb-4">{product.description}</p>
-                        <div className="text-3xl font-bold text-white mb-8">{product.price}</div>
-
-                        <div className="flex flex-col gap-4 mb-8">
-                          <div className="flex items-center">
-                            <input type="radio" id="one-time" name="purchase-type" className="mr-2" defaultChecked />
-                            <label htmlFor="one-time" className="text-white">
-                              One-time purchase
-                            </label>
-                          </div>
-                          <div className="flex items-center">
-                            <input type="radio" id="subscription" name="purchase-type" className="mr-2" />
-                            <label htmlFor="subscription" className="text-white">
-                              Subscribe & save 15% - $21.24
-                            </label>
-                          </div>
-                        </div>
-
-                        <button className="bg-[#2a7d3f] hover:bg-[#a3ff00] text-white hover:text-black font-bold py-3 px-6 rounded-full transition-all duration-300 text-lg flex items-center justify-center gap-2 w-full md:w-auto">
-                          <ShoppingCart className="w-5 h-5" />
-                          Add to Cart
-                        </button>
-                      </div>
-
-                      <div className="mt-8">
-                        <h2 className="text-2xl font-bold text-white mb-4">What's Inside?</h2>
-                        <p className="text-green-100 mb-4">{product.benefits}</p>
-
-                        <h3 className="text-xl font-semibold text-white mb-2">Ingredients:</h3>
-                        <p className="text-green-100">{product.ingredients}</p>
-
-                        <div className="flex gap-4 mt-6">
-                          <div className="bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-green-900/30">
-                            <div className="w-10 h-10 mx-auto mb-1 flex items-center justify-center">
-                              <svg
-                                viewBox="0 0 24 24"
-                                className="w-6 h-6 text-[#a3ff00]"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                              >
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                              </svg>
-                            </div>
-                            <span className="text-white text-xs block text-center">100% Organic</span>
-                          </div>
-                          <div className="bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-green-900/30">
-                            <div className="w-10 h-10 mx-auto mb-1 flex items-center justify-center">
-                              <svg
-                                viewBox="0 0 24 24"
-                                className="w-6 h-6 text-[#a3ff00]"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                              >
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                              </svg>
-                            </div>
-                            <span className="text-white text-xs block text-center">Vegan</span>
-                          </div>
-                          <div className="bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-green-900/30">
-                            <div className="w-10 h-10 mx-auto mb-1 flex items-center justify-center">
-                              <svg
-                                viewBox="0 0 24 24"
-                                className="w-6 h-6 text-[#a3ff00]"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                              >
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M8.5 8.5l7 7" />
-                                <path d="M8.5 15.5l7-7" />
-                              </svg>
-                            </div>
-                            <span className="text-white text-xs block text-center">Non-GMO</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-              {/* Review Section */}
-              <section className="mt-16">
-                <h2 className="text-3xl font-bold text-white mb-8">Customer Reviews</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {/* Sample Reviews */}
-                  {[
-                    { name: "Sarah M.", date: "May 20, 2024", review: "Great product! Noticed a difference within a week." },
-                    { name: "John D.", date: "April 15, 2024", review: "Excellent quality and fast shipping. Highly recommend." },
-                    { name: "Emily R.", date: "March 22, 2024", review: "This supplement is fantastic! I feel so much better." },
-                  ].map((review, index) => (
-                    <div
-                      key={index}
-                      className="rounded-xl bg-gradient-to-r from-green-800 to-black p-6 shadow-lg text-white"
-                    >
-                      {/* Star Rating (Placeholder) */}
-                      <div className="text-yellow-400 mb-2">
-                        ★★★★★
-                      </div>
-                      <h3 className="font-semibold text-lg mb-2">{review.name}</h3>
-                      <p className="text-sm text-gray-300 mb-4">{review.date}</p>
-                      <p>{review.review}</p>
-                    </div>
-                  ))}
-                </div>
-                {/* Example with no gradient - adjust as desired */}
-                {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {[
-                    { name: "Sarah M.", date: "May 20, 2024", review: "Great product! Noticed a difference within a week." },
-                    { name: "John D.", date: "April 15, 2024", review: "Excellent quality and fast shipping. Highly recommend." },
-                    { name: "Emily R.", date: "March 22, 2024", review: "This supplement is fantastic! I feel so much better." },
-                  ].map((review, index) => (
-                    <div key={index} className="rounded-xl bg-zinc-900 p-6 shadow-lg text-white">
-                      <h3 className="font-semibold text-lg mb-2">{review.name}</h3>
-                      <p className="text-sm text-gray-300 mb-4">{review.date}</p>
-                      <p>{review.review}</p>
-                    </div>
-                  ))}
-                </div> */}
-              </section>
-            </div>
-          ) : quizStarted ? (
+          {quizStarted ? (
             // Quiz View
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl md:text-4xl font-bold text-white mb-8">{questions[currentQuestion].question}</h1>
@@ -610,7 +365,7 @@ export default function ProductsPage() {
                     >
                       <motion.div
                         className="relative h-[300px] w-full mb-6 cursor-pointer"
-                        onClick={() => handleProductClick(product.id)}
+                        onClick={() => handleProductClick(product.slug)}
                         animate={{
                           y: [0, index % 2 === 0 ? -15 : 15, 0],
                           rotate: [0, index % 2 === 0 ? 2 : -2, 0],
@@ -643,7 +398,7 @@ export default function ProductsPage() {
                       <p className="text-green-100 text-center mb-4">{product.description}</p>
                       <span className="text-2xl font-bold text-white mb-4">{product.price}</span>
                       <button
-                        onClick={() => handleProductClick(product.id)}
+                        onClick={() => handleProductClick(product.slug)}
                         className="bg-[#2a7d3f] hover:bg-[#a3ff00] text-white hover:text-black font-bold py-2 px-4 rounded-full transition-all duration-300 text-sm flex items-center gap-2"
                       >
                         View Details

@@ -9,58 +9,28 @@ import EnhancedNavbar from "@/components/EnhancedNavbar"
 import WhyChooseUs from "@/components/WhyChooseUs"
 import NavbarSpacer from "@/components/NavbarSpacer"
 import EnhancedFooter from "@/components/EnhancedFooter"
-import SeaMossProductGallery from "@/components/SeaMossProductGallery"
-import ProductTestimonials from "@/components/ProductTestimonials"
 
-export default function SeaMossProductPage() {
-  const [quantity, setQuantity] = useState(1)
-  const [purchaseType, setPurchaseType] = useState("one-time")
-  const [activeTab, setActiveTab] = useState("description")
+export default function AshwagandhaPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-
-  const incrementQuantity = () => setQuantity((prev) => prev + 1)
-  const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
-
-  // Hardcoded product data for Sea Moss
+  
+  // Hardcoded product data for Ashwagandha
   const product = {
-    id: "sea-moss",
-    name: "Sea Moss Capsules",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-1-pMHzv6eRJM02zQZNZgMtztMgTv90ru.png",
+    id: "ashwagandha",
+    name: "Ashwagandha Capsules",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/asw-NRxGWWsSIhTrhtW8claBkH9HO7jX9c.png",
     images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-1-pMHzv6eRJM02zQZNZgMtztMgTv90ru.png",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-1-i0qZApkdeOp3EDV6A0W7VhJ2rGfMwP.png",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-HL2V44kMF7Z8FnaXgJ1J9PmhWAmoB5.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/asw-NRxGWWsSIhTrhtW8claBkH9HO7jX9c.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-yDzIoY1RRzlyKztbMSEiz2S8o3OG6L.png",
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-hgzW24k3sqYqDaJuvr1PhnJOeCWAmB.png",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unnamed-FjSGz9b59d9KRHDxgXAaSHctQk4XY8.png",
     ],
-    description: "Boost your immune system with our nutrient-rich Sea Moss supplement.",
-    price: "$29.99",
-    tag: "New",
+    description: "Reduce stress and boost immunity with our premium Ashwagandha.",
+    price: "$24.99",
+    tag: "Popular",
     benefits:
-      "Contains 92 of the 102 minerals your body needs, supporting immune function, digestion, and thyroid health. Rich in iodine, potassium, and calcium for overall wellness.",
-    ingredients: "100% Organic Irish Sea Moss (Chondrus crispus), Vegetable Cellulose Capsule",
+      "Naturally reduces cortisol levels, helping the body combat stress and fatigue. By balancing this key hormone, it supports relaxation, mental clarity, and a stronger immune system.",
+    ingredients: "100% Organic Ashwagandha Root (Withania somnifera), Vegetable Cellulose Capsule",
   }
-
-  // Define Sea Moss-specific testimonials
-  const seaMossReviews = [
-    {
-      name: "Alicia P.",
-      date: "October 18, 2024",
-      text: "I've been taking Sea Moss every morning and it's done wonders for my digestion and energy levels. I feel less bloated and way more alert during the day. It's now part of my daily routine and I swear by it.",
-      rating: 5
-    },
-    {
-      name: "Marcus L.",
-      date: "February 3, 2025",
-      text: "Sea Moss gave my immune system a real boost this winter. I usually get sick around February, but I haven't even caught a cold this year. My skin also feels clearer and healthier since I started taking it.",
-      rating: 5
-    },
-    {
-      name: "Danielle R.",
-      date: "May 27, 2025",
-      text: "I started using Sea Moss for thyroid support and noticed better focus and less fatigue within two weeks. It's one of the few supplements I've tried that actually made a difference. I'm really happy with the results so far.",
-      rating: 5
-    }
-  ]
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black flex flex-col">
@@ -140,14 +110,21 @@ export default function SeaMossProductPage() {
                     <Image
                       src={product.images[selectedImageIndex] || "/placeholder.svg"}
                       alt={product.name}
-                      width={800}
-                      height={800}
-                      className="object-contain relative z-10 mx-auto transition-transform duration-300"
+                      width={selectedImageIndex === 1 ? 600 : selectedImageIndex === 3 ? 500 : 800}
+                      height={selectedImageIndex === 1 ? 600 : selectedImageIndex === 3 ? 500 : 800}
+                      className={`object-contain relative z-10 mx-auto ${
+                        selectedImageIndex === 1 ? "rounded-lg shadow-lg" : ""
+                      } transition-transform duration-300`}
                       priority
                     />
                     {selectedImageIndex === 1 && (
                       <div className="absolute bottom-4 left-0 right-0 text-center text-sm text-white/80">
                         <p>Tap image to view full benefits</p>
+                      </div>
+                    )}
+                    {selectedImageIndex === 3 && (
+                      <div className="absolute bottom-4 left-0 right-0 text-center text-sm text-white/80">
+                        <p>Stacked bottles showing product collection</p>
                       </div>
                     )}
                   </motion.div>
@@ -188,7 +165,7 @@ export default function SeaMossProductPage() {
                     <div className="flex items-center">
                       <input type="radio" id="subscription" name="purchase-type" className="mr-2" />
                       <label htmlFor="subscription" className="text-white">
-                        Subscribe & save 15% - $25.49
+                        Subscribe & save 15% - $21.24
                       </label>
                     </div>
                   </div>
@@ -252,22 +229,6 @@ export default function SeaMossProductPage() {
                       <span className="text-white text-xs block text-center">Non-GMO</span>
                     </div>
                   </div>
-
-                  {activeTab === "reviews" && (
-                    <div className="text-white/80">
-                      <div className="space-y-12">
-                        <div className="flex justify-between items-center mb-8">
-                          <h2 className="text-3xl font-bold text-white">Customer Reviews</h2>
-                          <Link href="/products/sea-moss/testimonials" className="text-[#a3ff00] hover:underline flex items-center">
-                            View All <ArrowRight className="ml-1 h-4 w-4" />
-                          </Link>
-                        </div>
-                        
-                        {/* Use the product-specific reviews */}
-                        <ProductTestimonials testimonials={seaMossReviews} />
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
@@ -276,22 +237,22 @@ export default function SeaMossProductPage() {
             <section className="mt-16">
               <h2 className="text-3xl font-bold text-white mb-8">Customer Reviews</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {/* Sea Moss-specific Reviews */}
+                {/* Ashwagandha-specific Reviews */}
                 {[
                   { 
-                    name: "Tanya L.", 
-                    date: "June 2, 2024", 
-                    review: "I've tried so many supplements for my digestive issues, but Sea Moss is the only one that's made a real difference. My stomach feels settled, and I'm much more regular now. It's been a total game-changer for my gut health." 
+                    name: "Jason R.", 
+                    date: "May 28, 2024", 
+                    review: "I started taking Ashwagandha to improve my energy levels, and it's been a total game-changer. I feel more focused during work hours, and that mid-afternoon crash is gone. I actually look forward to getting things done now." 
                   },
                   { 
-                    name: "Marcus W.", 
-                    date: "May 25, 2024", 
-                    review: "As someone with hypothyroidism, I was looking for natural support alongside my medication. Since adding Sea Moss to my routine, I've noticed more consistent energy levels throughout the day and less brain fog. My last lab tests even showed improvement!" 
+                    name: "Danielle K.", 
+                    date: "May 16, 2024", 
+                    review: "I was constantly stressed and overwhelmed, especially at night. Ashwagandha has helped me wind down naturally. I'm sleeping better, and I feel way more emotionally balanced throughout the day." 
                   },
                   { 
-                    name: "Priya K.", 
-                    date: "May 12, 2024", 
-                    review: "I started taking Sea Moss for its mineral content, and I've been amazed at how much better my skin looks. It's clearer, more hydrated, and I've even noticed my hair growing faster and stronger. This is definitely a permanent part of my wellness routine now." 
+                    name: "Leo S.", 
+                    date: "April 30, 2024", 
+                    review: "I've been taking Ashwagandha consistently for a few months, and I noticed I haven't caught a cold or felt run-down like before. It's become part of my daily routine to help strengthen my immune system, especially during travel season." 
                   },
                 ].map((review, index) => (
                   <div

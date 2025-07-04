@@ -9,10 +9,12 @@ export const useZoomAnimation = (count: number) => {
 
   useEffect(() => {
     if (hasAnimated.current) return
+    if (!scope.current) return
+    
     hasAnimated.current = true
 
-    animate("div", { scale: [0.8, 1], opacity: [0, 1] }, { duration: 0.8, delay: stagger(0.2) })
-  }, [animate])
+    animate(scope.current, { scale: [0.8, 1], opacity: [0, 1] }, { duration: 0.8, delay: stagger(0.2) })
+  }, [animate, scope])
 
   return { scope }
 }
